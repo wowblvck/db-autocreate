@@ -1,0 +1,17 @@
+{
+  "name": "db-autocreate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fakerator": "^0.3.6",
+    "random-birthday": "^1.0.1"
+  }
+}

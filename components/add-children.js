@@ -1,0 +1,43 @@
+import { Path, URL } from "../config/server.js";
+import { generateChildrenNameM, generateChildrenNameF, generateRandomAdress, generateBirthday } from "../utils/randomPerson.js";
+import store from "./store.js";
+
+const getUsersFromDB = async () => {
+  const response = await fetch(`${URL}/${Path.Users}`);
+  return await response.json();
+}
+
+const getClassesIDFromDB = async () => {
+  const response = await fetch(`${URL}/${Path.Class}`);
+  return await response.json();
+}
+
+const addChildren = async (data) => {
+  await fetch(`${URL}/${Path.Childrens}`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  });
+  return true;
+}
+
+const createChildren = async () => {
+  const users = await getUsersFromDB();
+  const classes = await getClassesIDFromDB();
+  const classesID = classes.map((el) => el.id);
+  users.forEach(async (el, i) => {
+    await addChildren({
+      firstName: store.objects[i].gender === "male" ? generateChildrenNameM() : generateChildrenNameF(),
+      lastName: el.lastName,
+      classId:  classesID[Math.floor(Math.random() * classesID.length)],
+      parentId: el.id,
+      adress: generateRandomAdress(),
+      birthday: generateBirthday(),
+    });
+    console.log(`Create children for user ID - '${el.id}'`);
+  })
+}
+
+export default createChildren;
