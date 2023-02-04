@@ -6,7 +6,8 @@ const Path = {
   Register: "auth/register",
   Class: "classes",
   Users: "users",
-  Childrens: "childrens"
+  Childrens: "childrens",
+  News: "news"
 }
 
 export { URL, Path }
