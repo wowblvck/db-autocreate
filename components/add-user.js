@@ -5,6 +5,7 @@ import createClass from "./add-class.js";
 import fs from 'fs';
 import randomNumberGenerator from "../utils/randomNumber.js";
 import store from "./store.js";
+import generateProfilePic from "../utils/userPic.js";
 
 let classLetter = ["А", "Б", "В", "Г", "Д"];
 let randomIndex = Math.floor(Math.random() * classLetter.length);
@@ -41,11 +42,13 @@ const createUser = async () => {
     const lastName = randomName.lastName;
     const firstName = randomName.firstName;
     const person = generatePerson(firstName, lastName);
-    await addUserInDB(person);
     store.objects.push({
-      gender: randomName.gender,
-    })
+      id: i,
+      gender: randomName.gender
+    });
+    await addUserInDB({ ...person});
     console.log(`Person '${firstName} ${lastName}' added in database`);
+    generateProfilePic(i, randomName.gender, `${URL}/${Path.UserPic}`);
     if (i % MAX_CLASSES === 0) {
       await createUserTeacher({
           value: "teacher",

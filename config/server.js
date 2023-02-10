@@ -8,7 +8,9 @@ const Path = {
   Class: "classes",
   Users: "users",
   Childrens: "childrens",
-  News: "news"
+  News: "news",
+  UserPic: "users/edit/profile",
+  ChildrenPic: "childrens/edit/profile"
 }
 
 export { URL, Path }

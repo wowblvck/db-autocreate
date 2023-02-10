@@ -7,7 +7,7 @@ const run = async () => {
   await Promise.all([createRole()])
   .then(() => {
     createUser().then(() => {
-      createChildren()
+      createChildren();
     });
   });
   await createNews();
