@@ -11,7 +11,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cartoon-avatar": "^1.0.2",
     "fakerator": "^0.3.6",
+    "node-fetch": "^3.3.0",
     "random-birthday": "^1.0.1"
+  },
+  "dependencies": {
+    "jimp": "^0.22.4"
   }
 }
