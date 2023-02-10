@@ -1,4 +1,3 @@
-import { Path, URL } from "../config/server.js";
 import * as toonavatar from "cartoon-avatar";
 import Jimp from "jimp";
 import { Blob } from 'node:buffer';

@@ -38,6 +38,4 @@ const createNews = async () => {
   }
 }
 
-// createNews();
-
 export default createNews;

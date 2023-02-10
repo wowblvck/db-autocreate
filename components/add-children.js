@@ -39,7 +39,7 @@ const createChildren = async () => {
         birthday: generateBirthday(),
       });
       console.log(`Create children for user ID - '${el.id}'`);
-      generateProfilePic(children.id, store.objects[i].gender, `${URL}/${Path.ChildrenPic}`);
+      await generateProfilePic(children.id, store.objects[i].gender, `${URL}/${Path.ChildrenPic}`);
     }
   });
 }

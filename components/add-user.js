@@ -42,13 +42,13 @@ const createUser = async () => {
     const lastName = randomName.lastName;
     const firstName = randomName.firstName;
     const person = generatePerson(firstName, lastName);
+    await addUserInDB(person);
     store.objects.push({
       id: i,
       gender: randomName.gender
     });
-    await addUserInDB({ ...person});
     console.log(`Person '${firstName} ${lastName}' added in database`);
-    generateProfilePic(i, randomName.gender, `${URL}/${Path.UserPic}`);
+    await generateProfilePic(i, randomName.gender, `${URL}/${Path.UserPic}`);
     if (i % MAX_CLASSES === 0) {
       await createUserTeacher({
           value: "teacher",
