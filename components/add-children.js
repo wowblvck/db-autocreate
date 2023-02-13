@@ -1,47 +1,33 @@
 import { Path, URL } from "../config/server.js";
-import { generateChildrenNameM, generateChildrenNameF, generateRandomAdress, generateBirthday } from "../utils/randomPerson.js";
-import store from "./store.js";
-import generateProfilePic from "../utils/userPic.js";
-
-const getUsersFromDB = async () => {
-  const response = await fetch(`${URL}/${Path.Users}`);
-  return await response.json();
-}
-
-const getClassesIDFromDB = async () => {
-  const response = await fetch(`${URL}/${Path.Class}`);
-  return await response.json();
-}
-
-const addChildren = async (data) => {
-  const response = await fetch(`${URL}/${Path.Childrens}`, {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  });
-  return await response.json();
-}
+import { generateChildrenNameM, generateChildrenNameF, generateRandomAdress, generateBirthday } from "../utils/person-generator.js";
+import generateProfilePic from "../utils/picture-generator.js";
+import { addChildren, getParents } from "../api/children.js";
+import { getClasses } from "../api/class.js";
 
 const createChildren = async () => {
-  const users = await getUsersFromDB();
-  const classes = await getClassesIDFromDB();
+  const parents = await getParents();
+  if (!parents.length) {
+    return console.log(`Befor creating childrens create a users!`);
+  }
+  const classes = await getClasses();
+  if (!classes.length) {
+    return console.log(`Befor creating childrens create a classes!`);
+  }
   const classesID = classes.map((el) => el.id);
-  users.forEach(async (el, i) => {
-    if (el.id === store.objects[i].id) {
-      const children = await addChildren({
-        firstName: store.objects[i].gender === "male" ? generateChildrenNameM() : generateChildrenNameF(),
-        lastName: el.lastName,
-        classId:  classesID[Math.floor(Math.random() * classesID.length)],
-        parentId: el.id,
-        adress: generateRandomAdress(),
-        birthday: generateBirthday(),
-      });
-      console.log(`Create children for user ID - '${el.id}'`);
-      await generateProfilePic(children.id, store.objects[i].gender, `${URL}/${Path.ChildrenPic}`);
-    }
+  parents.forEach(async (parent) => {
+    const children = await addChildren({
+      firstName: parent.gender === "male" ? generateChildrenNameM() : generateChildrenNameF(),
+      lastName: parent.lastName,
+      classId:  classesID[Math.floor(Math.random() * classesID.length)],
+      parentId: parent.id,
+      gender: parent.gender,
+      adress: generateRandomAdress(),
+      birthday: generateBirthday(),
+    });
+    await generateProfilePic(children.id, children.gender, `${URL}/${Path.ChildrenPic}`);
   });
 }
+
+// createChildren();
 
 export default createChildren;

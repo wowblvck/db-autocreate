@@ -19,7 +19,6 @@ const generateProfilePic = async (id, gender, path) => {
     method: "PUT",
     body: formData,
   });
-  console.log(`Profile picture was updates for ID ${id}`);
   return await postResponse.json();
 };
 

@@ -42,12 +42,13 @@ const generateRandomAdress = () => {
   return fakerator.address.street();
 }
 
-const generatePerson = (firstName, lastName) => {
+const generatePerson = (firstName, lastName, gender) => {
   return {
     username: fakeratorEn.internet.userName(),
     password: fakerator.internet.password(),
     firstName: firstName,
-    lastName: lastName
+    lastName: lastName,
+    gender
   };
 }
 

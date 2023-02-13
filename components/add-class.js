@@ -1,21 +1,25 @@
-import { Path, URL } from "../config/server.js";
+import { getClassByName, addClass } from "../api/class.js";
+import { getTeachers } from "../api/teacher.js";
+import { MAX_TEACHERS } from "../config/params.js";
+import generateClassName from "../utils/class-name-generator.js";
 
-const addClassInDB = async (data) => {
-  const response = await fetch(`${URL}/${Path.Class}`, {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  });
-  if (!response.ok) {
-    console.log(`The record is already in the database`);
+const createClass = async () => {
+  const teachers = await getTeachers();
+  if (!teachers) {
+    return console.log("Before create class create a teacher");
   }
-  return await response.json();
-}
-
-const createClass = async (data) => {
-  await addClassInDB(data);
+  for(let teacher of teachers) {
+    let randomClassName = "";
+    let classN = {};
+    do {
+      randomClassName = generateClassName(MAX_TEACHERS);
+      classN = await getClassByName(randomClassName);
+    } while (randomClassName === classN.className);
+    await addClass({
+      className: randomClassName,
+      classTeacherId: teacher.id
+    });
+  }
 }
 
 export default createClass;
