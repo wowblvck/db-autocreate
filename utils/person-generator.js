@@ -34,7 +34,8 @@ const generateChildrenNameF = () => {
 
 const generateBirthday = () => {
   const birthday = randomBirthday({ type: 'child' });
-  let formattedDate = birthday.toLocaleDateString("ru-RU", { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const isoDate = birthday.toISOString();
+  const formattedDate = isoDate.substr(0, 10);
   return formattedDate;
 }
 
