@@ -12,7 +12,8 @@ const Path = {
   UserPic: "users/edit/profile",
   ChildrenPic: "childrens/edit/profile",
   Teachers: "users?role=teacher",
-  Parents: "users?role=parent"
+  Parents: "users?role=parent",
+  Quarters: "quarters"
 }
 
 export { URL, Path }

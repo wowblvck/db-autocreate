@@ -4,7 +4,7 @@ const FILENAME_USERS = "users.txt";
 const FILENAME_TEACHERS = "teachers.txt";
 
 //Max users count generating in database
-const MAX_USERS =125;
+const MAX_USERS = 30;
 
 //Count of teacher = count of classes (1 teacher = 1 class)
 const MAX_TEACHERS = 5;
