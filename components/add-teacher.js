@@ -1,7 +1,7 @@
 import { generatePerson, generateRandomName } from "../utils/person-generator.js";
 import { Path, URL } from "../config/server.js";
 import { MAX_TEACHERS, FILENAME_TEACHERS} from "../config/params.js";
-import createFile from "../utils/files.js";
+import { createFile } from "../utils/files.js";
 import generateProfilePic from "../utils/picture-generator.js";
 import { getRoles } from "../api/role.js";
 import parseJwt from "../utils/token-parser.js";

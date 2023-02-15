@@ -23,4 +23,22 @@ const createFile = async (array, filename) => {
   }
 }
 
-export default createFile;
+
+const createFileSubject = async (array, filename) => {
+  try {
+    const filePath = path.resolve(__dirname, "..", FILEPATH);
+    if (!fs.existsSync(filePath)) {
+      fs.mkdirSync(filePath, { recursive: true });
+    }
+    let fileContent = "";
+    array.forEach((subject, i) => {
+      fileContent += `${i + 1}. Name: ${subject.name}. Homework: ${subject.homework}. ClassId: ${subject.classId}. Quarter: ${subject.quarter}. Date: ${subject.date}\n`;
+    });
+    fs.writeFileSync(path.join(filePath, filename), fileContent);
+    console.log(`File ${filename} successfuly created!`);
+  } catch (e) {
+    throw new Error(`Error while create ${filename} - ${e}`);
+  }
+}
+
+export { createFile, createFileSubject };

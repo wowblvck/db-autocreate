@@ -11,4 +11,9 @@ const addQuarter = async (data) => {
   return await postResponse.json();
 }
 
-export default addQuarter;
+const getQuarters = async() => {
+  const postResponse = await fetch(`${URL}/${Path.Quarters}`);
+  return await postResponse.json();
+}
+
+export { addQuarter, getQuarters };
