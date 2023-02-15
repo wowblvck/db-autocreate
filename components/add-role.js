@@ -12,6 +12,4 @@ const createRole = async () => {
   }));
 }
 
-// createRole();
-
 export default createRole;
