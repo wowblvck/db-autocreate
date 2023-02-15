@@ -6,7 +6,7 @@ const getClassByName = async (name) => {
   if (data.statusCode === 404) {
     return false;
   }
-  return await response.json();
+  return data;
 }
 
 const getClasses = async () => {
