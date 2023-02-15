@@ -17,6 +17,7 @@
     "random-birthday": "^1.0.1"
   },
   "dependencies": {
-    "jimp": "^0.22.4"
+    "jimp": "^0.22.4",
+    "moment": "^2.29.4"
   }
 }
