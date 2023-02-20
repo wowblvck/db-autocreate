@@ -2,7 +2,7 @@ import * as toonavatar from "cartoon-avatar";
 import Jimp from "jimp";
 import { Blob } from 'node:buffer';
 
-const generateProfilePic = async (id, gender, path) => {
+const editProfile = async (id, gender, path, phone) => {
   const url = toonavatar.generate_avatar({"gender": `${gender}`});
   const jimpImage = await Jimp.read(url);
   const buffer = await jimpImage.getBufferAsync(Jimp.MIME_PNG);
@@ -15,6 +15,9 @@ const generateProfilePic = async (id, gender, path) => {
   const blob = new Blob([buffer], { type: "image/png" });
 
   formData.append('profilePic', blob, `user_pic_${id}.png`);
+  if (phone) {
+    formData.append("phone", phone);
+  }
   const postResponse = await fetch(path, {
     method: "PUT",
     body: formData,
@@ -22,4 +25,4 @@ const generateProfilePic = async (id, gender, path) => {
   return await postResponse.json();
 };
 
-export default generateProfilePic;
+export default editProfile;

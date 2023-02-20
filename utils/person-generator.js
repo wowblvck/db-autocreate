@@ -39,6 +39,10 @@ const generateBirthday = () => {
   return formattedDate;
 }
 
+const generatePhone = () => {
+  return fakerator.phone.number();
+}
+
 const generateRandomAdress = () => {
   return fakerator.address.street();
 }
@@ -59,5 +63,6 @@ export {
   generateChildrenNameM,
   generateChildrenNameF,
   generateRandomAdress, 
-  generateBirthday 
+  generateBirthday,
+  generatePhone
 };

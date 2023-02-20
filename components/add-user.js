@@ -1,8 +1,8 @@
-import { generatePerson, generateRandomName } from "../utils/person-generator.js";
+import { generatePerson, generatePhone, generateRandomName } from "../utils/person-generator.js";
 import { Path, URL } from "../config/server.js";
 import { MAX_USERS, FILENAME_USERS } from "../config/params.js";
 import { createFile } from "../utils/files.js";
-import generateProfilePic from "../utils/picture-generator.js";
+import editProfile from "../utils/edit-profile.js";
 import { getRoles } from "../api/role.js";
 import parseJwt from "../utils/token-parser.js";
 import addUser from "../api/users.js";
@@ -23,7 +23,8 @@ const createUser = async () => {
     const user = await addUser(person);
     promises.push(user);
     const userParse = parseJwt(user.token);
-    promises.push(await generateProfilePic(userParse.id, randomName.gender, `${URL}/${Path.UserPic}`));
+    const phone = generatePhone();
+    promises.push(await editProfile(userParse.id, randomName.gender, `${URL}/${Path.UserPic}`, phone));
     resultFile.push(person);
   }
   await Promise.all([promises]).then(() => {

@@ -1,6 +1,6 @@
 import { Path, URL } from "../config/server.js";
 import { generateChildrenNameM, generateChildrenNameF, generateRandomAdress, generateBirthday } from "../utils/person-generator.js";
-import generateProfilePic from "../utils/picture-generator.js";
+import editProfile from "../utils/edit-profile.js";
 import { addChildren, getParents } from "../api/children.js";
 import { getClasses } from "../api/class.js";
 
@@ -24,7 +24,7 @@ const createChildren = async () => {
       adress: generateRandomAdress(),
       birthday: generateBirthday(),
     });
-    await generateProfilePic(children.id, children.gender, `${URL}/${Path.ChildrenPic}`);
+    await editProfile(children.id, children.gender, `${URL}/${Path.ChildrenPic}`);
   });
 }
 

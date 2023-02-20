@@ -24,7 +24,6 @@ const createSubjects = async () => {
         const subjectsItems = pickRandom(subjects, numSubjects);
 
         let startTime = moment({ year: date.year(), month: date.month(), date: date.date(), hour: 8, minute: 30 });
-        let endTime = moment(startTime).add(45, 'minutes');
         
         for (const subject of subjectsItems) {
           const item = {
@@ -35,12 +34,12 @@ const createSubjects = async () => {
             quarter: quarter.quarter,
           };
           const promise = createSubject(item);
+          
           promises.push(promise);
   
           allItems.push(item);
         
-          startTime = moment(endTime).add(15, 'minutes');
-          endTime = moment(startTime).add(45, 'minutes');
+          startTime.add(60, 'minutes');
 
           await promise;
         };
@@ -52,13 +51,21 @@ const createSubjects = async () => {
   });
 }
 
-function pickRandom(arr, num) {
-  const shuffled = arr.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, num);
+function pickRandom(array, numItems) {
+  const result = [];
+
+  for (let i = 0; i < numItems; i++) {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    result.push(array[randomIndex]);
+  }
+
+  return result;
 }
 
 function formatDateTime(date) {
   return date.format('YYYY-MM-DD HH:mm');
 }
+
+// createSubjects();
 
 export default createSubjects;

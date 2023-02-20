@@ -2,11 +2,12 @@ import { generatePerson, generateRandomName } from "../utils/person-generator.js
 import { Path, URL } from "../config/server.js";
 import { MAX_TEACHERS, FILENAME_TEACHERS} from "../config/params.js";
 import { createFile } from "../utils/files.js";
-import generateProfilePic from "../utils/picture-generator.js";
+import editProfile from "../utils/edit-profile.js";
 import { getRoles } from "../api/role.js";
 import parseJwt from "../utils/token-parser.js";
 import addUser from "../api/users.js";
 import { createUserTeacher } from "../api/teacher.js";
+import { generatePhone } from "../utils/person-generator.js";
 
 
 const createTeacher = async () => {
@@ -28,7 +29,8 @@ const createTeacher = async () => {
       value: "teacher",
       userId: userParse.id
     })
-    promises.push(await generateProfilePic(userParse.id, randomName.gender, `${URL}/${Path.UserPic}`));
+    const phone = generatePhone();
+    promises.push(await editProfile(userParse.id, randomName.gender, `${URL}/${Path.UserPic}`, phone));
     resultFile.push(person);
   }
   await Promise.all([promises]).then(() => {
