@@ -1,5 +1,5 @@
-const URL = "https://school-book-production.up.railway.app";
-// const URL = "http://localhost:5000";
+// const URL = "https://school-book-production.up.railway.app";
+const URL = "http://localhost:5000";
 
 const Path = {
   Roles: "roles",
@@ -14,7 +14,8 @@ const Path = {
   Teachers: "users?role=teacher",
   Parents: "users?role=parent",
   Quarters: "quarters",
-  Subjects: "subjects"
+  Subjects: "subjects",
+  Info: "info"
 }
 
 export { URL, Path }
