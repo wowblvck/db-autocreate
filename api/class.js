@@ -1,16 +1,21 @@
 import { Path, URL } from "../config/server.js";
+import store from "../components/store.js";
 
 const getClassByName = async (name) => {
-  const response = await fetch(`${URL}/${Path.Class}?name=${name}`);
-  const data = await response.json();
-  if (data.statusCode === 404) {
-    return false;
-  }
-  return data;
+  const response = await fetch(`${URL}/${Path.Class}?name=${name}`, {
+    headers: {
+      Authorization: `Bearer ${store.Token}`
+    }
+  });
+  return await response.json();
 }
 
 const getClasses = async () => {
-  const response = await fetch(`${URL}/${Path.Class}`);
+  const response = await fetch(`${URL}/${Path.Class}`, {
+    headers: {
+      Authorization: `Bearer ${store.Token}`
+    }
+  });
   return await response.json();
 }
 
@@ -19,6 +24,7 @@ const addClass = async (data) => {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${store.Token}`
     },
     body: JSON.stringify(data)
   });

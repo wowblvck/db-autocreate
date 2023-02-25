@@ -9,12 +9,13 @@ const createClass = async () => {
     return console.log("Before create class create a teacher");
   }
   for(let teacher of teachers) {
-    let randomClassName = "";
-    let classN = {};
-    do {
+    let randomClassName = generateClassName(MAX_TEACHERS);
+    let classN = await getClassByName(randomClassName);
+
+    while (randomClassName === classN.className) {
       randomClassName = generateClassName(MAX_TEACHERS);
       classN = await getClassByName(randomClassName);
-    } while (randomClassName === classN.className);
+    }
     await addClass({
       className: randomClassName,
       classTeacherId: teacher.id

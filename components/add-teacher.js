@@ -6,7 +6,7 @@ import editProfile from "../utils/edit-profile.js";
 import { getRoles } from "../api/role.js";
 import parseJwt from "../utils/token-parser.js";
 import addUser from "../api/users.js";
-import { createUserTeacher } from "../api/teacher.js";
+import { roleUpdate } from "../api/role.js";
 import { generatePhone } from "../utils/person-generator.js";
 
 
@@ -25,7 +25,7 @@ const createTeacher = async () => {
     const user = await addUser(person);
     promises.push(user);
     const userParse = parseJwt(user.token);
-    await createUserTeacher({
+    await roleUpdate({
       value: "teacher",
       userId: userParse.id
     })

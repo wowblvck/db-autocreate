@@ -1,6 +1,7 @@
 import * as toonavatar from "cartoon-avatar";
 import Jimp from "jimp";
 import { Blob } from 'node:buffer';
+import store from "../components/store.js";
 
 const editProfile = async (id, gender, path, phone) => {
   const url = toonavatar.generate_avatar({"gender": `${gender}`});
@@ -21,6 +22,9 @@ const editProfile = async (id, gender, path, phone) => {
   const postResponse = await fetch(path, {
     method: "PUT",
     body: formData,
+    headers: {
+      Authorization: `Bearer ${store.Token}`
+    }
   });
   return await postResponse.json();
 };

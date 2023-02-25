@@ -1,6 +1,7 @@
 import { Path, URL } from "../config/server.js";
 import Jimp from "jimp";
 import { Blob } from 'node:buffer';
+import store from "../components/store.js";
 
 const addNews = async (data, image) => {
   const { title, content } = data;
@@ -17,9 +18,12 @@ const addNews = async (data, image) => {
     }
     const blob = new Blob([buffer], { type: "image/jpeg" });
     formData.append('image', blob, image.name);
-    
+  
     const postResponse = await fetch(`${URL}/${Path.News}`, {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${store.Token}`,
+      },
       body: formData,
     });
     return await postResponse.json();
