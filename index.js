@@ -8,6 +8,7 @@ import createQuarter from "./components/add-quarters.js";
 import createSubjects from "./components/add-subjects.js";
 import createInfo from "./components/add-info.js";
 import adminAuth from "./components/admin-login.js";
+import createGrade from "./components/add-grade.js";
 
 const run = async () => {
   await Promise.all([adminAuth()]).then(() => {
@@ -26,6 +27,9 @@ const run = async () => {
               console.log("All quarters will be created!");
               Promise.all([createSubjects()]).then(() => {
                 console.log("All subjects will be created!");
+                Promise.all([createGrade()]).then(() => {
+                  console.log("All gardes will be created!");
+                })
               })
             })
           })

@@ -16,7 +16,8 @@ const Path = {
   Parents: "users?role=parent",
   Quarters: "quarters",
   Subjects: "subjects",
-  Info: "info"
+  Info: "info",
+  Grades: "grades",
 }
 
 export { URL, Path }

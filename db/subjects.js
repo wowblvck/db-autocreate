@@ -51,7 +51,7 @@ const physicalTraining = {
 }
 
 const art = {
-  name: "Изобразительное искусство",
+  name: "ИЗО",
   homework: [
     null,
     "Принести гуашь",

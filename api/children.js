@@ -10,6 +10,15 @@ const getParents = async () => {
   return await response.json();
 }
 
+const getChildrens = async () => {
+  const response = await fetch(`${URL}/${Path.Childrens}`, {
+    headers: {
+      Authorization: `Bearer ${store.Token}`
+    }
+  });
+  return await response.json();
+}
+
 const addChildren = async (data) => {
   const response = await fetch(`${URL}/${Path.Childrens}`, {
     method: "POST",
@@ -22,4 +31,4 @@ const addChildren = async (data) => {
   return await response.json();
 }
 
-export { getParents, addChildren };
+export { getParents, addChildren, getChildrens };

@@ -13,4 +13,13 @@ const createSubject = async(data) => {
   return await response.json();
 }
 
-export default createSubject;
+const getSubjectByChildren = async (classid, childrenid) => {
+  const response = await fetch(`${URL}/${Path.Subjects}?class=${classid}&childrenid=${childrenid}`, {
+    headers: {
+      Authorization: `Bearer ${store.Token}`
+    }
+  });
+  return await response.json();
+}
+
+export { createSubject, getSubjectByChildren };
