@@ -1,5 +1,4 @@
-// const URL = "https://school-book-production.up.railway.app";
-const URL = "http://localhost:5000";
+const URL = "https://api.school-book.wowblvck.tech";
 
 const Path = {
   Roles: "roles",
@@ -18,6 +17,6 @@ const Path = {
   Subjects: "subjects",
   Info: "info",
   Grades: "grades",
-}
+};
 
-export { URL, Path }
+export { URL, Path };
